@@ -15,6 +15,9 @@ public class Emprestimo {
 	}
 
 	public void setLivro(Livro livro) {
+		if (livro == null) {
+			throw new RuntimeException("Livro invalido");
+		}
 		this.livro = livro;
 	}
 
@@ -23,6 +26,9 @@ public class Emprestimo {
 	}
 
 	public void setUsuario(Usuario usuario) {
+		if (usuario == null) {
+			throw new RuntimeException("Usuario invalido");
+		}
 		this.usuario = usuario;
 	}
 
@@ -31,7 +37,12 @@ public class Emprestimo {
 	}
 
 	public void setDataEmprestimo(String dataEmprestimo) {
-		this.dataEmprestimo = dataEmprestimo;
+		if (validaData(dataEmprestimo)) {
+			this.dataEmprestimo = dataEmprestimo;
+		}else {
+			throw new RuntimeException("Data invalida");
+		}
+		
 	}
 
 	public String getDataDevolucao() {
