@@ -4,6 +4,10 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
+
 public class Emprestimo {
 	private Livro livro;
 	private Usuario usuario;
@@ -44,13 +48,24 @@ public class Emprestimo {
 		}
 		
 	}
+	
+	public String setDataEmprestimo() {
+		DateTimeFormatter fmt = DateTimeFormat.forPattern("dd/MM/YYYY");
+		return new DateTime().toString(fmt);
+		
+	}
+	
 
 	public String getDataDevolucao() {
 		return dataDevolucao;
 	}
 
 	public void setDataDevolucao(String data) {
-		this.dataDevolucao = data;
+		if (validaData(data)) {
+			this.dataDevolucao = data;
+		}else {
+			throw new RuntimeException("Data invalida");
+		}
 	}
 
 	/**
